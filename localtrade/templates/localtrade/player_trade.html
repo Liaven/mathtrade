@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+        <h2>Trade for: {{ player.name}}</h2>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Game</th>
+                    <th>List of trades</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for game in games %}
+                <tr>
+                    <td>{{ game.name}} </td>
+                    <td><img src="{{game.picture}}"/></td>
+                    <td>
+
+                        <table class="table table-striped">
+                            <tbody>
+                                {% for trade in game.trades %}
+                                <tr>
+                                    <td>{{ trade.name }}</td>
+                                    <td><img src="{{trade.picture}}"/></td>
+                                </tr>
+                                {% empty %}
+                                    No trade
+                                {% endfor %}
+                            </tbody>
+                        </table>
+
+
+                    </td>
+                </tr>
+                {% empty %}
+                    <li>No gamet yet.</li>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

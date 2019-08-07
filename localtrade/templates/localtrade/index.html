@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% load admin_urls %}
+
+{% block title %}Main Menu{% endblock %}
+
+{% block content %}
+
+<h1>Index</h1>
+<div class="container">
+    <li><a href="{%url 'admin:localtrade_player_changelist' %}">Players</a></li>
+    <li><a href="{%url 'admin:localtrade_game_changelist' %}">Games</a></li>
+    <li><a href="{% url 'wantlist'%}">Show wantlist</a></li>
+    <li><a href="{% url 'exectrade'%}">Exect trade</a></li>
+</div>
+
+{% endblock %}

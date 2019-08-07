@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}WantList{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    {% for line in lines %}
+    {{ line }}<br>
+    {% endfor %}
+</div>
+
+FILE<br>
+{{ filename }}
+{% endblock %}

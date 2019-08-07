@@ -1,0 +1,17 @@
+<html lang="en">
+    <head>
+        <title>{% block title %}Local BoardgameTrade{% endblock %}</title>
+        {% load bootstrap4 %}
+        {% bootstrap_css %}
+    </head>
+
+    <body>
+        <div id="content" class="container">
+            <div class="md-col-10">
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+        {# JS y jQuery Bootstrap #}
+        {% bootstrap_javascript jquery='full' %}
+    </body>
+</html>

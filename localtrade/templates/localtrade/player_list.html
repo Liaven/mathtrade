@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}{% endblock %}
+{% block content %}
+
+    <h2>Here are all players: </h2>
+    <div>
+        <ul>
+            {% for games in object_list %}
+                <li>{{ player.name}} | <a
+                        href="{% url 'player-update' player.pk %}">edit</a>
+                    <a href="{% url 'player-delete' player.pk %}">delete</a>
+                </li>
+            {% empty %}
+                <li>No player yet.</li>
+            {% endfor %}
+
+        </ul>
+        <p>
+            <a href="{% url 'player-add' %}">add a player</a>
+        </p>
+    </div>
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+        <h2>Result of trades</h2>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Game Origin</th>
+                    <th>Receives</th>
+                    <th>Sends</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for dat in data %}
+                <tr>
+                    <td>
+                        <table>
+                            <tr><td><img src="{{dat.urlgame1}}"/></td></tr>
+                            <tr><td>{{ dat.game1 }}</td></tr>
+                        </table>
+                    </td>
+
+                    <td>
+                        {% if dat.game2 %}
+                            <table>
+                                <tr><td><img src="{{dat.urlgame2}}"/></td></tr>
+                                <tr><td>{{ dat.game2 }}</td></tr>
+                            </table>
+                        {% else %}
+                            NOT TRADE
+                        {% endif %}
+                    </td>
+
+                    <td>
+                        {% if dat.game3 %}
+                            <table>
+                                <tr><td><img src="{{dat.urlgame3}}"/></td></tr>
+                                <tr><td>{{ dat.game3 }}</td></tr>
+                            </table>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}
