@@ -25,6 +25,23 @@ def getformfield(request, pk, field):
 
 from django.utils.safestring import mark_safe
 
+def getbgginfo(name, id, url):
+    newid = id
+    newurl = url
+
+    if newid == "":
+        result = bgg.search(name, qtype='boardgame', exact=True)
+        number = int(result["items"]["total"])
+        if (number == 1):
+            newid = result["items"]["item"]["id"]
+        elif (number > 1):
+            newid = result["items"]["item"][0]["id"]
+    if newid != "" and newurl == "":
+        result = bgg.boardgame(newid)
+        newurl = result['items']['item']['thumbnail']['TEXT']
+    return newid, newurl
+
+
 class GameInline(InlineActionsMixin, admin.TabularInline):
     model = Game
     extra = 0
@@ -43,17 +60,7 @@ class GameInline(InlineActionsMixin, admin.TabularInline):
     def bgg(self, request, obj, parent_obj=None):
         # Get bgg id
         newname = getformfield(request, str(obj.pk), "name")
-        result = bgg.search(newname, qtype='boardgame', exact=True)
-        number = int(result["items"]["total"])
-        if (number == 1):
-            obj.idbgg = result["items"]["item"]["id"]
-        elif (number > 1):
-            obj.idbgg = result["items"]["item"][0]["id"]
-        obj.name = newname
-        if obj.idbgg != "":
-            result = bgg.boardgame(obj.idbgg )
-            obj.imageurl = result['items']['item']['thumbnail']['TEXT']
-
+        obj.idbgg, obj.imageurl = getbgginfo(newname, obj.idbgg, obj.imageurl)
         obj.save()
         messages.info(request, "New bgg saved")
 
@@ -87,9 +94,9 @@ class PlayerAdmin(InlineActionsModelAdminMixin, admin.ModelAdmin):
         super(PlayerAdmin, self).save_related(request, form, formsets, change)
         player = form.instance
         for game in Game.objects.all().filter(player=player.id):
-            pass
-            # TODO: CHECK ID Y FOTO
-            #print (game.pk)
+            if game.idbgg == "" or game.imageurl == "":
+                game.idbgg, game.imageurl = getbgginfo(game.name, game.idbgg, game.imageurl)
+                game.save()
         #player.save()
 
 

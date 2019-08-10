@@ -10,8 +10,8 @@
             <thead>
                 <tr>
                     <th>Game Origin</th>
+                    <th>Send To</th>
                     <th>Receives</th>
-                    <th>Sends</th>
                 </tr>
             </thead>
             <tbody>
@@ -25,21 +25,18 @@
                     </td>
 
                     <td>
-                        {% if dat.game2 %}
-                            <table>
-                                <tr><td><img src="{{dat.urlgame2}}"/></td></tr>
-                                <tr><td>{{ dat.game2 }}</td></tr>
-                            </table>
+                        {% if dat.game3 %}
+                            {{ dat.game3 }}
                         {% else %}
                             NOT TRADE
                         {% endif %}
                     </td>
 
                     <td>
-                        {% if dat.game3 %}
+                        {% if dat.game2 %}
                             <table>
-                                <tr><td><img src="{{dat.urlgame3}}"/></td></tr>
-                                <tr><td>{{ dat.game3 }}</td></tr>
+                                <tr><td><img src="{{dat.urlgame2}}"/></td></tr>
+                                <tr><td>{{ dat.game2 }}</td></tr>
                             </table>
                         {% endif %}
                     </td>
