@@ -69,7 +69,7 @@ def _getGame(idgame, user):
 
 
 def ExecTrade(request):
-    regex = "^\((?P<name1>.*)\) (?P<game1>\d) receives \((?P<name2>.*)\) (?P<game2>\d) and sends to \((?P<name3>.*)\) (?P<game3>\d)$"
+    regex = "^\((?P<name1>.*)\) (?P<game1>\d) *receives \((?P<name2>.*)\) (?P<game2>\d) *and sends to \((?P<name3>.*)\) (?P<game3>\d)$"
     regnotrade = "^\((?P<name1>.*)\) (?P<game1>\d) *does not trade$"
     os.chdir(os.path.dirname(__file__))
     jarname = os.path.join(os.getcwd(), "tm.jar")
